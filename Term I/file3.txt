@@ -1,0 +1,8 @@
+  File: 'file1.txt'
+  Size: 1922      	Blocks: 8          IO Block: 4096   regular file
+Device: 806h/2054d	Inode: 5125523     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/gandharv)   Gid: ( 1000/gandharv)
+Access: 2020-02-23 15:47:51.824419852 +0530
+Modify: 2020-02-23 15:47:41.900050335 +0530
+Change: 2020-02-23 15:47:41.900050335 +0530
+ Birth: -
