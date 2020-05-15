@@ -3,7 +3,7 @@
 #include<time.h>
 #include<stdlib.h>
 #include<wait.h>
-
+#include<fcntl.h>
 
 int main(){
 
@@ -20,9 +20,9 @@ int main(){
 
         close(fd[0]); //close read
         close(1);
-        dup(fd[1]); // STDOUT ----> fd[1] (write)
+        fd[1] = fcntl(fd[1],F_DUPFD); // STDOUT ----> fd[1] (write)
 
-        execlp("ls","ls","-l",(char *) NULL);
+        execlp("/bin/ls","bin/ls","-l",(char *) NULL);
         close(fd[1]);
         return 0;
     }
@@ -31,7 +31,7 @@ int main(){
 
         close(fd[1]); //close write
         close(0);
-        dup(fd[0]); // STDIN ----> fd[0] read
+        fd[0] = fcntl(fd[0],F_DUPFD); // STDIN ----> fd[0] read
         execlp("wc","wc",(char *) NULL);
         close(fd[0]);
     }

@@ -20,9 +20,9 @@ int main(){
 
         close(fd[0]); //close read
         close(1);
-        dup(fd[1]); // STDOUT ----> fd[1] (write)
+        dup2(fd[1],1); // STDOUT ----> fd[1] (write)
 
-        execlp("ls","ls","-l",(char *) NULL);
+        execlp("/bin/ls","bin/ls","-l",(char *) NULL);
         close(fd[1]);
         return 0;
     }
@@ -31,7 +31,7 @@ int main(){
 
         close(fd[1]); //close write
         close(0);
-        dup(fd[0]); // STDIN ----> fd[0] read
+        dup2(fd[0],0); // STDIN ----> fd[0] read
         execlp("wc","wc",(char *) NULL);
         close(fd[0]);
     }
