@@ -5,7 +5,7 @@
 int main(){
     
     struct itimerval value;
-    int which = ITIMER_REAL;
+    int which = ITIMER_PROF;
 
     getitimer( which, &value );
 
