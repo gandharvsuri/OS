@@ -24,11 +24,12 @@ int main(){
     server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = htonl(5555);
 
+    
     if(connect(sd,(struct sockaddr *)(&server),sizeof(server)) == -1){
         perror("connection failed");
         exit(EXIT_FAILURE);
     }
-
+    getchar();
     write(sd,"HI SERVER\n",sizeof("HE SERVER\n"));
     read(sd,buf,sizeof(buf));
     printf("MESSAGE FROM SERVER : %s\n",buf);

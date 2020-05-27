@@ -9,6 +9,9 @@
 
 int main(){
 
+    struct timeval tmo;
+    fd_set readfds;
+
     struct sockaddr_in server, client;
     unsigned int sd,sz,nsd; //server file descriptor, size, nsd
     int opt = 1;
@@ -43,6 +46,15 @@ int main(){
     if((nsd = accept(sd,(struct sockaddr *)(&client),&sz)) <0){
         perror("accept");
         exit(EXIT_FAILURE);
+    }
+
+    FD_ZERO(&readfds);
+    FD_SET(nsd, &readfds);
+    tmo.tv_sec = 3;
+    tmo.tv_usec = 0;
+    if(!select(nsd+1, &readfds, NULL, NULL, &tmo)){
+        printf("No Response from Client\n");
+        exit(0);
     }
     read(nsd,buf,sizeof(buf));
     printf("MESSAGE FROM CLIENT : %s\n",buf);
